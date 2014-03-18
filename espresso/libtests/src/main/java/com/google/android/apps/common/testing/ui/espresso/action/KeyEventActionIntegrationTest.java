@@ -5,6 +5,7 @@ import static com.google.android.apps.common.testing.ui.espresso.Espresso.onView
 import static com.google.android.apps.common.testing.ui.espresso.Espresso.pressBack;
 import static com.google.android.apps.common.testing.ui.espresso.action.ViewActions.click;
 import static com.google.android.apps.common.testing.ui.espresso.assertion.ViewAssertions.matches;
+import static com.google.android.apps.common.testing.ui.espresso.matcher.BoundedDecoratingMatcher.withCorrectType;
 import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMatchers.isAssignableFrom;
 import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMatchers.isDisplayed;
 import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMatchers.isRoot;
@@ -14,7 +15,6 @@ import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMat
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.hasValue;
-import static org.hamcrest.Matchers.instanceOf;
 
 import com.google.android.apps.common.testing.testrunner.annotations.SdkSuppress;
 import com.google.android.apps.common.testing.ui.espresso.NoActivityResumedException;
@@ -28,7 +28,6 @@ import android.test.suitebuilder.annotation.LargeTest;
 import android.view.KeyEvent;
 import android.widget.TextView;
 
-import java.util.Map;
 
 
 /**
@@ -59,21 +58,21 @@ public class KeyEventActionIntegrationTest extends ActivityInstrumentationTestCa
   @SuppressWarnings("unchecked")
   public void testClickBackOnNonRootActivityLatte() {
     getActivity();
-    onData(allOf(instanceOf(Map.class), hasValue("SendActivity"))).perform(click());
+    onData(withCorrectType(hasValue("SendActivity"))).perform(click());
     pressBack();
 
     // Make sure we are back.
-    onData(allOf(instanceOf(Map.class), hasValue("SendActivity"))).check(matches(isDisplayed()));
+    onData(withCorrectType(hasValue("SendActivity"))).check(matches(isDisplayed()));
   }
 
   @SuppressWarnings("unchecked")
   public void testClickBackOnNonRootActionNoLatte() {
     getActivity();
-    onData(allOf(instanceOf(Map.class), hasValue("SendActivity"))).perform(click());
+    onData(withCorrectType(hasValue("SendActivity"))).perform(click());
     onView(isRoot()).perform(ViewActions.pressBack());
 
     // Make sure we are back.
-    onData(allOf(instanceOf(Map.class), hasValue("SendActivity"))).check(matches(isDisplayed()));
+    onData(withCorrectType(hasValue("SendActivity"))).check(matches(isDisplayed()));
   }
 
   @SuppressWarnings("unchecked")
@@ -123,7 +122,7 @@ public class KeyEventActionIntegrationTest extends ActivityInstrumentationTestCa
   @SuppressWarnings("unchecked")
   public void testPressKeyWithKeyCode() {
     getActivity();
-    onData(allOf(instanceOf(Map.class), hasValue("SendActivity"))).perform(click());
+    onData(withCorrectType(hasValue("SendActivity"))).perform(click());
     onView(withId(R.id.enter_data_edit_text)).perform(click());
     onView(withId(R.id.enter_data_edit_text)).perform(ViewActions.pressKey(KeyEvent.KEYCODE_X));
     onView(withId(R.id.enter_data_edit_text)).perform(ViewActions.pressKey(KeyEvent.KEYCODE_Y));

@@ -4,6 +4,7 @@ import static com.google.android.apps.common.testing.ui.espresso.Espresso.onData
 import static com.google.android.apps.common.testing.ui.espresso.Espresso.onView;
 import static com.google.android.apps.common.testing.ui.espresso.action.ViewActions.click;
 import static com.google.android.apps.common.testing.ui.espresso.assertion.ViewAssertions.matches;
+import static com.google.android.apps.common.testing.ui.espresso.matcher.BoundedDecoratingMatcher.withCorrectType;
 import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMatchers.hasSibling;
 import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMatchers.withId;
 import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMatchers.withText;
@@ -39,12 +40,12 @@ public class AdapterDataIntegrationTest extends ActivityInstrumentationTestCase2
 
   @SuppressWarnings("unchecked")
   public void testClickAroundList() {
-    onData(allOf(is(instanceOf(Map.class)), hasEntry(is(LongListActivity.STR), is("item: 99"))))
+    onData(withCorrectType(hasEntry(is(LongListActivity.STR), is("item: 99"))))
         .perform(click());
     onView(withId(R.id.selection_row_value))
         .check(matches(withText("99")));
 
-    onData(allOf(is(instanceOf(Map.class)), hasEntry(is(LongListActivity.STR), is("item: 1"))))
+      onData(withCorrectType(hasEntry(is(LongListActivity.STR), is("item: 1"))))
         .perform(click());
 
     onView(withId(R.id.selection_row_value))
@@ -58,7 +59,7 @@ public class AdapterDataIntegrationTest extends ActivityInstrumentationTestCase2
         .check(matches(withText("20")));
 
     // lets operate on a specific child of a row...
-    onData(allOf(is(instanceOf(Map.class)), hasEntry(is(LongListActivity.STR), is("item: 50"))))
+    onData(withCorrectType(hasEntry(is(LongListActivity.STR), is("item: 50"))))
         .onChildView(withId(R.id.item_size))
         .perform(click())
         .check(matches(withText(String.valueOf("item: 50".length()))));

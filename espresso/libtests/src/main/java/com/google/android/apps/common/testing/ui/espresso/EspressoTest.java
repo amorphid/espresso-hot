@@ -6,12 +6,11 @@ import static com.google.android.apps.common.testing.ui.espresso.Espresso.openAc
 import static com.google.android.apps.common.testing.ui.espresso.Espresso.openContextualActionModeOverflowMenu;
 import static com.google.android.apps.common.testing.ui.espresso.action.ViewActions.click;
 import static com.google.android.apps.common.testing.ui.espresso.assertion.ViewAssertions.matches;
+import static com.google.android.apps.common.testing.ui.espresso.matcher.BoundedDecoratingMatcher.withCorrectType;
 import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMatchers.withId;
 import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMatchers.withText;
-import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.any;
 import static org.hamcrest.Matchers.hasValue;
-import static org.hamcrest.Matchers.instanceOf;
 
 import com.google.android.apps.common.testing.ui.espresso.action.ViewActions;
 import com.google.android.apps.common.testing.ui.testapp.ActionBarTestActivity;
@@ -27,7 +26,6 @@ import android.view.inputmethod.InputMethodManager;
 
 import org.hamcrest.Matcher;
 
-import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
@@ -50,7 +48,7 @@ public class EspressoTest extends ActivityInstrumentationTestCase2<MainActivity>
 
   @SuppressWarnings("unchecked")
   public void testOpenOverflowInActionMode() {
-    onData(allOf(instanceOf(Map.class), hasValue(ActionBarTestActivity.class.getSimpleName())))
+    onData(withCorrectType(hasValue(ActionBarTestActivity.class.getSimpleName())))
         .perform(click());
     openContextualActionModeOverflowMenu();
     onView(withText("Key"))
@@ -61,7 +59,7 @@ public class EspressoTest extends ActivityInstrumentationTestCase2<MainActivity>
 
   @SuppressWarnings("unchecked")
   public void testOpenOverflowFromActionBar() {
-    onData(allOf(instanceOf(Map.class), hasValue(ActionBarTestActivity.class.getSimpleName())))
+    onData(withCorrectType(hasValue(ActionBarTestActivity.class.getSimpleName())))
         .perform(click());
     onView(withId(R.id.hide_contextual_action_bar))
         .perform(click());
@@ -74,7 +72,7 @@ public class EspressoTest extends ActivityInstrumentationTestCase2<MainActivity>
 
   @SuppressWarnings("unchecked")
   public void testCloseSoftKeyboard() {
-    onData(allOf(instanceOf(Map.class), hasValue(SendActivity.class.getSimpleName())))
+    onData(withCorrectType(hasValue(SendActivity.class.getSimpleName())))
         .perform(click());
 
     onView(withId(R.id.enter_data_edit_text)).perform(new ViewAction() {
