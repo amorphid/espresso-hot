@@ -26,7 +26,7 @@ public class AmbiguousViewMatcherExceptionTest extends AndroidTestCase {
   @Override
   public void setUp() throws Exception {
     super.setUp();
-    alwaysTrueMatcher = Matchers.<View>notNullValue();
+    alwaysTrueMatcher = Matchers.notNullValue(View.class);
     testView = new RelativeLayout(getContext());
     child1 = new TextView(getContext());
     child1.setId(1);

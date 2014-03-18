@@ -23,7 +23,7 @@ public class NoMatchingViewExceptionTest extends AndroidTestCase {
   public void setUp() throws Exception {
     super.setUp();
     MockitoAnnotations.initMocks(this);
-    alwaysFailingMatcher = Matchers.<View>nullValue();
+    alwaysFailingMatcher = Matchers.nullValue(View.class);
   }
 
   public void testExceptionContainsMatcherDescription() {

@@ -9,7 +9,7 @@ import static com.google.android.apps.common.testing.ui.espresso.assertion.ViewA
 import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMatchers.withId;
 import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
-import static org.hamcrest.Matchers.anything;
+import static org.hamcrest.Matchers.any;
 import static org.hamcrest.Matchers.hasValue;
 import static org.hamcrest.Matchers.instanceOf;
 
@@ -80,7 +80,7 @@ public class EspressoTest extends ActivityInstrumentationTestCase2<MainActivity>
     onView(withId(R.id.enter_data_edit_text)).perform(new ViewAction() {
       @Override
       public Matcher<View> getConstraints() {
-        return anything();
+        return any(View.class);
       }
 
       @Override

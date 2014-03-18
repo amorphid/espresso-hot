@@ -57,7 +57,7 @@ public class ViewInteractionTest extends AndroidTestCase {
     rootView = new View(getContext());
     targetView = new View(getContext());
     viewMatcher = is(targetView);
-    actionConstraint = Matchers.<View>notNullValue();
+    actionConstraint = Matchers.notNullValue(View.class);
     rootMatcherRef = new AtomicReference<Matcher<Root>>(RootMatchers.DEFAULT);
     when(mockAction.getDescription()).thenReturn("A Mock!");
     failureHandler = new FailureHandler() {
@@ -161,7 +161,7 @@ public class ViewInteractionTest extends AndroidTestCase {
 
   public void testInRootUpdatesRef() {
     initInteraction();
-    Matcher<Root> testMatcher = nullValue();
+    Matcher<Root> testMatcher = nullValue(Root.class);
     testInteraction.inRoot(testMatcher);
     assertEquals(testMatcher, rootMatcherRef.get());
   }

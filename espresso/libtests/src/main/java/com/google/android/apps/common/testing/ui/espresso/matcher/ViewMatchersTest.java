@@ -68,7 +68,7 @@ public class ViewMatchersTest extends InstrumentationTestCase {
   public void testWithContentDescriptionCharSequence() {
     View view = new View(getInstrumentation().getTargetContext());
     view.setContentDescription(null);
-    assertTrue(withContentDescription(Matchers.<CharSequence>nullValue()).matches(view));
+    assertTrue(withContentDescription(Matchers.nullValue(CharSequence.class)).matches(view));
     CharSequence testText = "test text!";
     view.setContentDescription(testText);
     assertTrue(withContentDescription(is(testText)).matches(view));
@@ -97,7 +97,7 @@ public class ViewMatchersTest extends InstrumentationTestCase {
   public void testWithContentDescriptionString() {
     View view = new View(getInstrumentation().getTargetContext());
     view.setContentDescription(null);
-    assertTrue(withContentDescription(Matchers.<String>nullValue()).matches(view));
+    assertTrue(withContentDescription(Matchers.nullValue(String.class)).matches(view));
     String testText = "test text!";
     view.setContentDescription(testText);
     assertTrue(withContentDescription(is(testText)).matches(view));
