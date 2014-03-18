@@ -2,6 +2,7 @@ package com.google.android.apps.common.testing.ui.espresso;
 
 import static com.google.android.apps.common.testing.ui.espresso.action.ViewActions.click;
 import static com.google.android.apps.common.testing.ui.espresso.action.ViewActions.pressMenuKey;
+import static com.google.android.apps.common.testing.ui.espresso.matcher.BoundedDecoratingMatcher.withCorrectType;
 import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMatchers.isDisplayed;
 import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMatchers.isRoot;
 import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMatchers.withClassName;
@@ -59,9 +60,9 @@ public final class Espresso {
    *
    * @param dataMatcher a matcher used to find the data object.
    */
-  public static DataInteraction onData(Matcher<Object> dataMatcher) {
-    return new DataInteraction(dataMatcher);
-  }
+  public static DataInteraction onData(Matcher<?> dataMatcher) {
+        return new DataInteraction(withCorrectType(dataMatcher));
+    }
 
   /**
    * Registers a Looper for idle checking with the framework. This is intended for use with

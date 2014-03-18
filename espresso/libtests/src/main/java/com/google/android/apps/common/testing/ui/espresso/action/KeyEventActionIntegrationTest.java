@@ -5,7 +5,6 @@ import static com.google.android.apps.common.testing.ui.espresso.Espresso.onView
 import static com.google.android.apps.common.testing.ui.espresso.Espresso.pressBack;
 import static com.google.android.apps.common.testing.ui.espresso.action.ViewActions.click;
 import static com.google.android.apps.common.testing.ui.espresso.assertion.ViewAssertions.matches;
-import static com.google.android.apps.common.testing.ui.espresso.matcher.BoundedDecoratingMatcher.withCorrectType;
 import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMatchers.isAssignableFrom;
 import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMatchers.isDisplayed;
 import static com.google.android.apps.common.testing.ui.espresso.matcher.ViewMatchers.isRoot;
@@ -58,21 +57,21 @@ public class KeyEventActionIntegrationTest extends ActivityInstrumentationTestCa
   @SuppressWarnings("unchecked")
   public void testClickBackOnNonRootActivityLatte() {
     getActivity();
-    onData(withCorrectType(hasValue("SendActivity"))).perform(click());
+    onData(hasValue("SendActivity")).perform(click());
     pressBack();
 
     // Make sure we are back.
-    onData(withCorrectType(hasValue("SendActivity"))).check(matches(isDisplayed()));
+    onData(hasValue("SendActivity")).check(matches(isDisplayed()));
   }
 
   @SuppressWarnings("unchecked")
   public void testClickBackOnNonRootActionNoLatte() {
     getActivity();
-    onData(withCorrectType(hasValue("SendActivity"))).perform(click());
+    onData(hasValue("SendActivity")).perform(click());
     onView(isRoot()).perform(ViewActions.pressBack());
 
     // Make sure we are back.
-    onData(withCorrectType(hasValue("SendActivity"))).check(matches(isDisplayed()));
+    onData(hasValue("SendActivity")).check(matches(isDisplayed()));
   }
 
   @SuppressWarnings("unchecked")
@@ -122,7 +121,7 @@ public class KeyEventActionIntegrationTest extends ActivityInstrumentationTestCa
   @SuppressWarnings("unchecked")
   public void testPressKeyWithKeyCode() {
     getActivity();
-    onData(withCorrectType(hasValue("SendActivity"))).perform(click());
+    onData(hasValue("SendActivity")).perform(click());
     onView(withId(R.id.enter_data_edit_text)).perform(click());
     onView(withId(R.id.enter_data_edit_text)).perform(ViewActions.pressKey(KeyEvent.KEYCODE_X));
     onView(withId(R.id.enter_data_edit_text)).perform(ViewActions.pressKey(KeyEvent.KEYCODE_Y));
